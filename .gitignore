@@ -1,0 +1,6 @@
+node_modules
+vendor
+config
+public/.htaccess
+composer.lock
+package-lock.json

@@ -1,0 +1,20 @@
+{
+    "name": "federicomalfasi/uptask",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Models\\": "./models",
+            "Controllers\\": "./controllers"
+        }
+    },
+    "authors": [
+        {
+            "name": "Federico Malfasi",
+            "email": "Federico.malfasi@gmail.com"
+        }
+    ],
+    "require": {
+        "ufedev/ufexpress": "^1.1",
+        "phpmailer/phpmailer": "^6.6"
+    }
+}
