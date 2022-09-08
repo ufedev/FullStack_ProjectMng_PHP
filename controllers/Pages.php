@@ -3,13 +3,13 @@
 namespace Controllers;
 
 use Models\Usuarios;
-use Ufe\RouterFS as Ro;
+use Ufe\Router as Ro;
 
 class Pages
 {
 
 
-    public static function login(Ro $router): void
+    public static function login($req, $res, $render): void
     {
         no_auth();
         $alertas = null;
@@ -22,6 +22,8 @@ class Pages
                 $user = Usuarios::findOneBy("email", $email);
                 if (!$user) {
                     $alertas = "Usuario y/o contraseña no válidos";
+                } else if (!$user->confirmado) {
+                    $alertas = "Debe verificar su cuenta con el correo ";
                 }
 
                 if (!$alertas) {
@@ -40,18 +42,18 @@ class Pages
         }
 
         $content = __DIR__ . "/../views/pages/login.php";
-        $router->render($content, [
+        $render($content, [
             "titulo" => "Inicia Sesión",
             "alertas" => $alertas,
             "clase" => null
         ], LAYOUT);
     }
-    public static function logout(Ro $router): void
+    public static function logout($req, $res, $render): void
     {
         $_SESSION = [];
         auth();
     }
-    public static function registrar(Ro $router): void
+    public static function registrar($req, $res, $render): void
     {
         no_auth();
         $nuevo_registro = new Usuarios();
@@ -78,26 +80,26 @@ class Pages
 
 
         $content = __DIR__ . "/../views/pages/registro.php";
-        $router->render($content, [
+        $render($content, [
             "titulo" => "Crear Cuenta",
             "alertas" => $alertas,
             "registro" => $nuevo_registro,
             "clase" => $clase
         ], LAYOUT);
     }
-    public static function registroExitoso(Ro $router): void
+    public static function registroExitoso($req, $res, $render): void
     {
         no_auth();
         $content = __DIR__ . "/../views/pages/registroExito.php";
-        $router->render($content, [
+        $render($content, [
             "titulo" => "Registrado!"
         ], LAYOUT);
         header("refresh:5;url= /");
     }
-    public static function confirmar(Ro $router): void
+    public static function confirmar($req, $res, $render): void
     {
 
-        $token = htmlspecialchars($_GET["token"]) ?? null;
+        $token = htmlspecialchars($req->params['token']) ?? null;
         $user = Usuarios::findOneBy("token", $token);
         $titulo_confirmar = "";
         $clase = null;
@@ -115,14 +117,14 @@ class Pages
             header("refresh:5; url=/");
         }
         $content = __DIR__ . "/../views/pages/confirmar.php";
-        $router->render($content, [
+        $render($content, [
             "titulo" => "Confirmar Cuenta",
             "titulo_confirmar" => $titulo_confirmar,
             "clase" => $clase,
             "msg" => $msg
         ], LAYOUT);
     }
-    public static function olvide(Ro $router): void
+    public static function olvide($req, $res, $render): void
     {
         no_auth();
         $clase = null;
@@ -132,9 +134,9 @@ class Pages
                 $user = Usuarios::findOneBy("email", $email);
 
                 if ($user && $email) {
-                    $res = $user->forgetPassword();
+                    $result = $user->forgetPassword();
 
-                    if ($res) {
+                    if ($result) {
                         $alertas = "Se ha enviado un mensaje a su casilla de Correo";
                         $clase = "exito";
                         header("refresh:5;url=/");
@@ -149,29 +151,51 @@ class Pages
             }
         }
         $content = __DIR__ . "/../views/pages/olvide.php";
-        $router->render($content, [
+        $render($content, [
             "titulo" => "Olvide Pass",
             "alertas" => $alertas ?? null,
             "clase" => $clase
         ], LAYOUT);
     }
-    public static function restablecer(Ro $router): void
+    public static function restablecer($req, $res, $render): void
     {
         no_auth();
         $alertas = null;
         $clase = null;
-        $token = htmlspecialchars($_GET['token']) ?? null;
+
+
+        $token = htmlspecialchars($req->params["token"]) ?? null;
         $user = Usuarios::findOneBy("token", $token);
         if ($token && $user) {
             if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+                $passwords = $req->body;
+                //Validación
+                if (in_array("", $passwords)) {
+                    $alertas = "todos los Campos son obligatorios";
+                } else if ($passwords["password"] !== $passwords["password2"]) {
+                    $alertas = "Las contraseñas no coinciden";
+                } else if (strlen($passwords["password"]) < 7) {
+                    $alertas = "La contraseña debe contener minimo 7 caracteres";
+                }
+
+                if (!$alertas) {
+                    $result = $user->changePassword($passwords["password"]);
+                    if ($result) {
+
+                        header("location:/");
+                    } else {
+                        $alertas = "hubo un error";
+                    }
+                }
             }
         } else {
-            $alertas = "Token no válido";
-            header("refresh:5;url=/");
+
+            header("location: /");
         }
 
         $content = __DIR__ . "/../views/pages/restablecer.php";
-        $router->render($content, [
+        $render($content, [
             "titulo" => "restablecer",
             "alertas" => $alertas,
             "clase" => $clase

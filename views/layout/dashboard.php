@@ -16,14 +16,14 @@
 
 
     <?php
-    include __DIR__ . "/../../components/header.php";
+    include __DIR__ . "/../components/header.php";
     ?>
 
 
     <div class="dashboard">
         <div class="dashboard_aside">
             <?php
-            include __DIR__ . "/../../components/lateral.php";
+            include __DIR__ . "/../components/lateral.php";
             ?>
         </div>
         <div class="dashboard_content">

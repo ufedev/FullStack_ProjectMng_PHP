@@ -4,7 +4,7 @@
 include __DIR__ . "/../config/app.php";
 
 
-use Ufe\RouterFS as Router;
+use Ufe\Router;
 
 
 $router = new Router();
@@ -15,4 +15,4 @@ include __DIR__ . "/../routes/LoginRoutes.php";
 include __DIR__ . "/../routes/DashRoutes.php";
 
 
-$router->listen();
+$router->listen(NOTFOUND);

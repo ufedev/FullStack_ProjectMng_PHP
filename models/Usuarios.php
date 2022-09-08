@@ -5,14 +5,13 @@ namespace Models;
 class Usuarios extends Main
 {
 
-    public $id;
+
     public $nombre;
     public $password;
     public $email;
     public $confirmado;
     public $token;
-    public $createAt;
-    public $updateAt;
+
 
     public static string $table = "usuarios";
     public static string $alertas = "";
@@ -70,6 +69,12 @@ class Usuarios extends Main
         $body_email = "<p>si enviaste este correo presiona <a href='http://uptask.host/restablecer/$this->token'>aquí</a> y restablece tu contraseña</p>";
         $this->sendMail("administrador@ufedev.com", $this->email, $this->nombre, "Restablecer Contraseña", $body_email);
         return $res;
+    }
+    public function changePassword($password): ?bool
+    {
+        $this->password = password_hash($password, PASSWORD_DEFAULT);
+        $this->token = "";
+        return $this->save();
     }
     public function confirm(): ?bool
     {

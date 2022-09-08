@@ -1,0 +1,70 @@
+@use "constantes" as c;
+
+.modal {
+  z-index: 10;
+  position: absolute;
+  background-color: rgba($color: c.$stone-300, $alpha: 0.5);
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  backdrop-filter: blur(5px);
+  transition: all 0.3s ease-in-out;
+  opacity: 1;
+}
+.modal_hidden {
+  opacity: 0;
+
+  visibility: hidden;
+}
+.modal_body {
+  position: fixed;
+  width: 50%;
+  max-width: 60rem;
+  padding: 5rem;
+  border-radius: 10px;
+  background-color: c.$stone-700;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  form {
+    margin-top: 3rem;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    div {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      label {
+        font-weight: 700;
+        font-size: 1.6rem;
+      }
+      input,
+      select,
+      textarea {
+        padding: 1rem 2rem;
+        border: none;
+        border-radius: 5px;
+      }
+    }
+    input[type="submit"] {
+      margin-top: 2rem;
+      padding: 1rem 2rem;
+      border: 1px solid c.$stone-100;
+      background-color: c.$stone-700;
+      font-weight: 700;
+      color: c.$stone-100;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.2s ease-in-out;
+
+      &:hover {
+        border-color: c.$indigo;
+        color: c.$indigo;
+      }
+    }
+  }
+}

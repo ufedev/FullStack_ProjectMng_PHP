@@ -27,7 +27,7 @@
     </div>
 
     <?php
-    include __DIR__ . "/../../components/alertas.php";
+    include __DIR__ . "/../components/alertas.php";
 
     ?>
 </div>

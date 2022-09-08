@@ -9,8 +9,9 @@ abstract class Main
 {
 
     public static string $table = "";
-    public static $db;
     public static string $alertas = "";
+    public $id;
+    public static $db;
     public $createAt;
     public $updateAt;
 
@@ -55,6 +56,11 @@ abstract class Main
             $data[] = static::createObj($value);
         }
         return $data;
+    }
+    public function prepareToSave(): void
+    {
+        $this->createAt = date('Y-m-d H:i:s');
+        $this->updateAt = date('Y-m-d H:i:s');
     }
     public function save()
     {
