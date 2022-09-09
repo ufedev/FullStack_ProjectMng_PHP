@@ -18,10 +18,12 @@ function css() {
 }
 
 function js() {
-  return src(paths.js)
-    .pipe(concat("app.js"))
-    .pipe(terser())
-    .pipe(dest("public/js"))
+  return (
+    src(paths.js)
+      .pipe(concat("app.js"))
+      //.pipe(terser())
+      .pipe(dest("public/js"))
+  )
 }
 
 function watchall() {

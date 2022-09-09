@@ -24,7 +24,7 @@ class Proyectos extends Main
         $this->descripcion = $args['descripcion'] ?? "";
         $this->cliente = $args['cliente'] ?? "";
         $this->entrega = $args['fecha'] ?? "";
-        $this->creador = $_SESSION['id'];
+        $this->creador = $_SESSION['id'] ?? "";
         $this->token = md5(uniqid(rand(), true));
     }
 

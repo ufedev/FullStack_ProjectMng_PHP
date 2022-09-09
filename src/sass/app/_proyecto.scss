@@ -1,13 +1,22 @@
 @use "constantes" as c;
-
+@use "utilities" as u;
 .header_proyecto {
   padding: 2rem;
   background-color: c.$stone-700;
   border-radius: 5px;
   margin-bottom: 5rem;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
+  flex-direction: column;
+  gap: 3rem;
+  text-align: center;
+  @include u.md {
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: left;
+  }
+
   h2 {
     font-size: 4rem;
   }
@@ -16,7 +25,12 @@
     flex-direction: column;
     gap: 1rem;
 
-    a {
+    a,
+    button {
+      border: none;
+      background-color: transparent;
+      padding: unset;
+      cursor: pointer;
       color: c.$stone-100;
       font-weight: 700;
       text-decoration: none;
@@ -33,6 +47,9 @@
       }
       &.delete:hover {
         color: c.$rojo;
+      }
+      &.nuevo:hover {
+        color: c.$naranja-apagado;
       }
     }
   }
@@ -72,9 +89,14 @@
   color: c.$stone-900;
   border-radius: 5px;
   display: flex;
-
+  margin-bottom: 1rem;
   align-items: center;
   justify-content: space-between;
+  div {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
   nav {
     display: flex;
     flex-direction: column;
@@ -100,5 +122,10 @@
       color: c.$stone-100;
       background-color: c.$rojo;
     }
+  }
+  .tarea_data {
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: c.$stone-700;
   }
 }

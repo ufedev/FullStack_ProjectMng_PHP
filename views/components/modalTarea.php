@@ -1,10 +1,12 @@
 <div class="modal modal_hidden" id="modal">
-    <div class="modal_body">
+
+    <div class="modal_body" id="modal_body">
         <h1>Nueva Tarea</h1>
         <form id="modal_form">
+
             <div>
                 <label for="nombre">Nombre</label>
-                <input type="text" name="nombre" id="nombre" placeholder="Nombre de la tarea">
+                <input type="text" name="nombre" id="nombre" placeholder="Nombre de la tarea" />
             </div>
             <div>
                 <label for="descripcion">Descripción</label>
@@ -12,7 +14,7 @@
             </div>
             <div>
                 <label for="entrega">Fecha de entrega</label>
-                <input type="date" name="entrega" id="entrega">
+                <input type="date" name="entrega" id="entrega" />
             </div>
             <div>
                 <label for="prioridad">Prioridad</label>
@@ -23,8 +25,10 @@
                     <option value="Alta">Alta</option>
                 </select>
             </div>
-
-            <input type="submit" value="Agregar Tarea">
+            <input type="hidden" name="proyecto" id="proyecto" value="<?php echo $proyecto->id; ?>" />
+            <input type="submit" value="Agregar Tarea" />
         </form>
+        <div id="alerta_modal">
+        </div>
     </div>
 </div>

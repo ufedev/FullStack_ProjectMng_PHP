@@ -24,6 +24,7 @@ class ProyectosController
     }
     public static function verProyecto($req, $res, $render): void
     {
+        auth();
         $proyecto = null;
         $token = $req->params['token'];
         $data = Proyectos::proyecto($_SESSION['id'], $token);

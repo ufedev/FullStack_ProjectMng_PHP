@@ -26,7 +26,7 @@ abstract class Main
 
         foreach ($this as $key => $value) {
             if ($key === "id") continue;
-            $clean_data[$key] = static::$db->real_escape_string(htmlspecialchars(trim($value)));
+            $clean_data[$key] = static::$db->real_escape_string(htmlspecialchars(trim($value ?? '')));
         }
 
         return $clean_data;
