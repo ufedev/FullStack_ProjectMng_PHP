@@ -54,7 +54,9 @@
     }
   }
 }
-.tareas {
+.tareas,
+.colaboradores {
+  margin-top: 3rem;
   .nueva_tarea {
     display: flex;
     align-items: center;
@@ -83,7 +85,9 @@
     }
   }
 }
-.tarea {
+.tarea,
+.colaborador {
+  margin-top: 2rem;
   padding: 2rem;
   background-color: c.$stone-300;
   color: c.$stone-900;
@@ -95,6 +99,7 @@
   div {
     display: flex;
     flex-direction: column;
+    flex-basis: 70%;
     gap: 0.5rem;
   }
   nav {
@@ -127,5 +132,18 @@
     font-weight: 700;
     font-size: 1.2rem;
     color: c.$stone-700;
+  }
+  .tarea_completa {
+    background-color: c.$verde;
+  }
+  .tarea_completadaPor {
+    background-color: c.$verde;
+    padding: 0.5rem;
+    border-radius: 10px;
+    font-weight: 700;
+    color: c.$stone-100;
+    display: block;
+    width: 50%;
+    text-align: center;
   }
 }

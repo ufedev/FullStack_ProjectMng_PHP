@@ -14,3 +14,5 @@
         <a href="/logout">Cerrar Sesión</a>
     </nav>
 </div>
+
+<?php include __DIR__ . "/../components/modalBuscar.php"; ?>

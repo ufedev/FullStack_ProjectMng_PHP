@@ -101,8 +101,25 @@ abstract class Main
         $res = static::query($query);
         return $res;
     }
-    public function delete()
+    /**
+     * Sincroniza los nuevos datos
+     */
+    public function sinc($args = []): void
     {
+        foreach ($args as $key => $value) {
+            if ($key === "id") continue;
+            if (property_exists($this, $key)) {
+                $this->$key = static::$db->real_escape_string(htmlspecialchars(trim($value ?? "")));
+            }
+        }
+    }
+    public function delete(): ?bool
+    {
+        $qry = "DELETE FROM " . static::$table;
+        $qry .= " WHERE id =" . $this->id . " LIMIT 1";
+
+        $result = static::query($qry);
+        return $result;
     }
 
     public static function findAll(): array
@@ -146,6 +163,8 @@ abstract class Main
             return $shift;
         }
     }
+
+
     // Mails
 
 

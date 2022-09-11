@@ -1,8 +1,8 @@
-<div class="modal modal_hidden" id="modal">
+<div class="modal modal_hidden" id="modal_editar">
 
     <div class="modal_body" id="modal_body">
-        <h1>Nueva Tarea</h1>
-        <form id="modal_form">
+        <h1>Editar Tarea</h1>
+        <form id="modal_form_editar">
 
             <div>
                 <label for="nombre">Nombre</label>
@@ -26,9 +26,9 @@
                 </select>
             </div>
             <input type="hidden" name="proyecto" id="proyecto" value="<?php echo $proyecto->id; ?>" />
-            <input type="submit" value="Agregar Tarea" id="submit" />
+            <input type="submit" value="Editar Tarea" id="submit" />
         </form>
-        <div id="alerta_modal">
+        <div id="alerta_modal_editar">
         </div>
     </div>
 </div>

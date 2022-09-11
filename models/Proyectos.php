@@ -58,6 +58,25 @@ class Proyectos extends Main
 
         return $return;
     }
+    public static function dataListProyectos($id_user)
+    {
+        $return = [];
+        $tabla = static::$table;
+        $secTabla = "colaboradores";
+        $qry = "SELECT $tabla.token as token, $tabla.nombre as proyecto, $tabla.creador as creador, $secTabla.colaborador as colaborador FROM $tabla";
+        $qry .= " LEFT JOIN $secTabla ON $secTabla.proyecto = $tabla.id";
+        $qry .= " WHERE creador=$id_user OR colaborador=$id_user";
+        $qry .= " GROUP BY $tabla.id";
+
+        $res = static::query($qry);
+
+        while ($r = $res->fetch_assoc()) {
+            $val = (object)$r;
+            $return[] = $val;
+        }
+
+        return $return;
+    }
     public static function proyecto($id_user, $token): ?array
     {
 

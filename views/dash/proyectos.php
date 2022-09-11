@@ -1,6 +1,9 @@
 <div>
     <h1>Proyectos</h1>
 
+    <?php if (count($proyectos) === 0) {
+        echo "<p class='sin_proyectos'>Todavía no hay proyectos...</p>";
+    } ?>
 
     <?php foreach ($proyectos as $proyecto) : ?>
 

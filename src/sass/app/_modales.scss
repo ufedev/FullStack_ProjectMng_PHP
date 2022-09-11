@@ -11,6 +11,7 @@
   backdrop-filter: blur(5px);
   transition: all 0.3s ease-in-out;
   opacity: 1;
+  color: c.$stone-100;
 }
 .modal_hidden {
   opacity: 0;
@@ -27,7 +28,10 @@
   top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
-
+  h4 {
+    margin-top: 2rem;
+    text-decoration: underline;
+  }
   form {
     margin-top: 3rem;
     width: 100%;
@@ -66,5 +70,33 @@
         color: c.$indigo;
       }
     }
+  }
+}
+
+.modal_lista_colaborador {
+  margin-top: 2rem;
+
+  button {
+    background-color: c.$indigo;
+    border: none;
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: c.$stone-100;
+    padding: 1rem 2rem;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease-out;
+    &:hover {
+      background-color: darken($color: c.$indigo, $amount: 10);
+    }
+  }
+}
+
+.modal_alerta_colaborador {
+  p {
+    margin-top: 2rem;
   }
 }

@@ -12,7 +12,7 @@ class Tareas extends Main
     public $prioridad;
     public $proyecto;
     public $completa;
-
+    public $completado_por;
 
 
     public function __construct($args = [])

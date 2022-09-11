@@ -1,12 +1,18 @@
-document.addEventListener("DOMContentLoaded", () => {})
+document.addEventListener("DOMContentLoaded", () => {
+  // setTimeout(() => {
+  //   window.location.reload()
+  // }, 5000)
+})
 
-function alerta(msg, type) {
-  const alerta = document.querySelector("#alerta_modal")
+function alerta(msg, type, modal) {
+  const alerta = document.querySelector(`${modal}`)
 
-  while (alerta.lastChild) {
-    alerta.removeChild(alerta.lastChild)
-  }
   if (alerta) {
+    const divAlerta = document.querySelector(`${modal} .alerta`)
+    if (divAlerta) {
+      alerta.removeChild(divAlerta)
+    }
+
     const mensaje = document.createElement("p")
     mensaje.classList.add("alerta")
     mensaje.classList.add(type)
